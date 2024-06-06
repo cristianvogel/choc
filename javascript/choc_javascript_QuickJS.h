@@ -64069,6 +64069,7 @@ struct QuickJSContext  : public Context::Pimpl
         context = JS_NewContext (runtime);
         CHOC_ASSERT (context != nullptr);
         JS_SetContextOpaque (context, this);
+        JS_SetMaxStackSize(runtime, 512 * 1024);
     }
 
     void pumpMessageLoop() override {}
