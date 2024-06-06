@@ -92,8 +92,9 @@ public:
             std::vector<uint8_t> data;
             std::string mimeType;
         };
-
-        using FetchResource = std::function<std::optional<Resource>(const std::string& path)>;
+        using Path = std::string;
+          using FetchResource = std::function<std::optional<Resource>(const Path&)>;
+   
 
         /// Serve resources to the browser from a C++ callback function.
         /// This can effectively be used to implement a basic web server,
