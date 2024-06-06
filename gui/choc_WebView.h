@@ -536,7 +536,7 @@ struct choc::ui::WebView::Pimpl
         CHOC_AUTORELEASE_BEGIN
 
         if (id s = call<id> (call<id> (getClass ("WKUserScript"), "alloc"), "initWithSource:injectionTime:forMainFrameOnly:",
-                                       getNSString (script), WKUserScriptInjectionTimeAtDocumentStart, (BOOL) 1))
+                                       getNSString (script), WKUserScriptInjectionTimeAtDocumentStart, (BOOL) 0))
         {
             call<void> (manager, "addUserScript:", s);
             call<void> (s, "release");
