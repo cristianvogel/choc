@@ -475,6 +475,7 @@ struct choc::ui::WebView::Pimpl
         call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("fullScreenEnabled"));
         call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("DOMPasteAllowed"));
         call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("javaScriptCanAccessClipboard"));
+        call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("allowFileAccessFromFileURLs"));
 
         if (options->enableDebugMode)
             call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("developerExtrasEnabled"));
