@@ -92,8 +92,9 @@ public:
             std::vector<uint8_t> data;
             std::string mimeType;
         };
-
-        using FetchResource = std::function<std::optional<Resource>(const std::string& path)>;
+        using Path = std::string;
+          using FetchResource = std::function<std::optional<Resource>(const Path&)>;
+   
 
         /// Serve resources to the browser from a C++ callback function.
         /// This can effectively be used to implement a basic web server,
@@ -475,6 +476,7 @@ struct choc::ui::WebView::Pimpl
         call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("fullScreenEnabled"));
         call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("DOMPasteAllowed"));
         call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("javaScriptCanAccessClipboard"));
+        call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("allowFileAccessFromFileURLs"));
 
         if (options->enableDebugMode)
             call<void> (prefs, "setValue:forKey:", getNSNumberBool (true), getNSString ("developerExtrasEnabled"));
@@ -535,7 +537,7 @@ struct choc::ui::WebView::Pimpl
         CHOC_AUTORELEASE_BEGIN
 
         if (id s = call<id> (call<id> (getClass ("WKUserScript"), "alloc"), "initWithSource:injectionTime:forMainFrameOnly:",
-                                       getNSString (script), WKUserScriptInjectionTimeAtDocumentStart, (BOOL) 1))
+                                       getNSString (script), WKUserScriptInjectionTimeAtDocumentStart, (BOOL) 0))
         {
             call<void> (manager, "addUserScript:", s);
             call<void> (s, "release");
